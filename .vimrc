@@ -28,8 +28,12 @@ set background=dark 			" Colour scheme
 colorscheme solarized
 set ruler				" Turns on ruler
 
+let NERDTreeIgnore = ['\.pyc$']
 
+"""""Powerline settings
 
+"set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
+set laststatus=2
 
 """"""""""""" Vundle stuff """""""""""""""""
 set nocompatible              " be iMproved, required
@@ -49,6 +53,8 @@ Plugin 'solarized'
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 Plugin 'tpope/vim-fugitive'
+
+Plugin 'The-NERD-tree'
 
 "" The following are examples of different formats supported.
 "" Keep Plugin commands between vundle#begin/end.
