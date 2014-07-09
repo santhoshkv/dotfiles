@@ -12,6 +12,7 @@ set hidden				" Hides buffers instead of closing them preventing unsaved changes
 
 cabbr <expr> ,, expand("/Volumes/epsilon/lambda")
 cabbr <expr> zz expand(":GundoToggle<CR>")
+cabbr <expr> xx expand(":NERDTreeToggle<CR>")
 
 "showcmd
 "When you set showcmd in your vimrc, the bottom line in your editor will show you information about the current command going on. The part I like is that if you’re selecting things in visual mode it will show you the number of lines selected, or, if you’re doing it 2d-style with CTRL-V, it will show XxY for the block you’re selecting.
@@ -29,7 +30,7 @@ set background=dark 			" Colour scheme
 colorscheme solarized
 set ruler				" Turns on ruler
 
-let NERDTreeIgnore = ['\.pyc$']
+let NERDTreeIgnore = ['*.pyc']
 
 """""Powerline settings
 
