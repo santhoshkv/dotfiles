@@ -7,6 +7,3 @@
 [submodule ".vim/bundle/vim-surround"]
 	path = .vim/bundle/vim-surround
 	url = git://github.com/tpope/vim-surround.git
-[submodule ".vim/bundle/powerline"]
-	path = .vim/bundle/powerline
-	url = https://github.com/Lokaltog/powerline.git

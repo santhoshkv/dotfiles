@@ -54,7 +54,9 @@ Plugin 'Gundo'
 
 Plugin 'solarized'
 
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+"Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+Plugin 'bling/vim-airline'
 
 Plugin 'tpope/vim-fugitive'
 
