@@ -32,7 +32,14 @@ Bundle 'klen/python-mode'
 
 Plugin 'ctrlp.vim'
 
+Plugin 'mhinz/vim-signify'
+
 Bundle 'git://github.com/davidhalter/jedi-vim'
+
+Plugin 'xuhdev/SingleCompile'
+
+"Plugin 'Shougo/vimproc.vim'
+"Plugin 'Shougo/vimshell.vim'
 
 
 "" The following are examples of different formats supported.
@@ -75,12 +82,16 @@ set showmatch				" Show matching paranthesis
 set incsearch				" Turns on incremental search
 set hidden				" Hides buffers instead of closing them preventing unsaved changes form dissapearino
 "set autochdir				" Changes current working dir to current location of file
+set scrolloff=999       " Magic srolling center thingy
 
 
 cabbr <expr> ,, expand("/Volumes/epsilon/lambda")
 cabbr <expr> zz expand(":GundoToggle<CR>")
 cabbr <expr> xx expand(":NERDTreeToggle<CR>")
 cabbr <expr> bb expand(":CtrlPBuffer<CR>")
+
+nmap <F9> :SCCompile<cr>		" Map F9 and F10 for C++ simplecompile
+nmap <F10> :SCCompileRun<cr>
 
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
 "Removed traling whitespaces from the ends of lines
@@ -137,7 +148,6 @@ let g:ctrlp_custom_ignore = {
 " ]]            Jump on next class or function (normal, visual, operator modes)
 " [M            Jump on previous class or method (normal, visual, operator modes)
 " ]M            Jump on next class or method (normal, visual, operator modes)
-let g:pymode_rope = 1
 
 " Documentation
 let g:pymode_doc = 1
@@ -147,7 +157,10 @@ let g:pymode_doc_key = 'K'
 let g:pymode_lint = 1
 let g:pymode_lint_checker = "pyflakes,pep8"
 " Auto check on save
-let g:pymode_lint_write = 1
+"let g:pymode_lint_write = 1
+
+" Auto check on fly
+let g:pymode_lint_on_fly = 1
 
 " Support virtualenv
 let g:pymode_virtualenv = 1
