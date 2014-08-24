@@ -38,9 +38,7 @@ Bundle 'git://github.com/davidhalter/jedi-vim'
 
 Plugin 'xuhdev/SingleCompile'
 
-"Plugin 'Shougo/vimproc.vim'
-"Plugin 'Shougo/vimshell.vim'
-
+Plugin 'duff/vim-scratch'
 
 "" The following are examples of different formats supported.
 "" Keep Plugin commands between vundle#begin/end.
@@ -82,7 +80,9 @@ set showmatch				" Show matching paranthesis
 set incsearch				" Turns on incremental search
 set hidden				" Hides buffers instead of closing them preventing unsaved changes form dissapearino
 "set autochdir				" Changes current working dir to current location of file
-set scrolloff=999       " Magic srolling center thingy
+"set scrolloff=999       " Magic srolling center thingy
+set nobackup		" No backup 
+set noswapfile
 
 
 cabbr <expr> ,, expand("/Volumes/epsilon/lambda")
@@ -92,6 +92,11 @@ cabbr <expr> bb expand(":CtrlPBuffer<CR>")
 
 nmap <F9> :SCCompile<cr>		" Map F9 and F10 for C++ simplecompile
 nmap <F10> :SCCompileRun<cr>
+
+"Maps ,(l)cd to change pwd to current file dir and prints it
+nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
+nnoremap ,lcd :lcd %:p:h<CR>:pwd<CR>
+
 
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
 "Removed traling whitespaces from the ends of lines
@@ -112,7 +117,7 @@ set background=dark 			" Colour scheme
 colorscheme solarized
 set ruler				" Turns on ruler
 
-let NERDTreeIgnore = ['*.pyc']
+let NERDTreeIgnore = ['\.pyc$','\.js$','\.css$','\.html$']
 
 let g:ctrlp_working_path_mode = 'ra'
 "When invoked, unless a starting directory is specified, CtrlP will set its local working directory according to this variable'c' - the directory of the current file. 'r' - the nearest ancestor that contains one of these directories or files: .git .hg .svn .bzr _darcs 'a' - like c, but only if the current working directory outside of CtrlP is not a direct ancestor of the directory of the current file. 0 or '' (empty string) - disable this feature.
@@ -126,11 +131,8 @@ let g:ctrlp_max_files = 500000
 
 unlet g:ctrlp_custom_ignore
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$' }
-
-
-
+  \ 'dir': '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|installer\|tmp$',
+  \ 'file': '\v\.(exe|so|dll|js|pyc|css|html|ttf|jpeg|gif|mustache|png|md|wf)$' }
 
 """""""""""""" Python Mode
 
@@ -157,7 +159,7 @@ let g:pymode_doc_key = 'K'
 let g:pymode_lint = 1
 let g:pymode_lint_checker = "pyflakes,pep8"
 " Auto check on save
-"let g:pymode_lint_write = 1
+
 
 " Auto check on fly
 let g:pymode_lint_on_fly = 1
@@ -167,7 +169,6 @@ let g:pymode_virtualenv = 1
 
 " Enable breakpoints plugin
 let g:pymode_breakpoint = 1
-let g:pymode_breakpoint_key = '<leader>b'
 
 " syntax highlighting
 let g:pymode_syntax = 1
@@ -178,8 +179,24 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 " Don't autofold code
 let g:pymode_folding = 0
 
+" Remap 'insert ped breakpoint' from <leader>b to <leader>pdb 
+
+let g:pymode_breakpoint_bind = '<leader>pdb'
+
 let g:pymode_rope = 0  " Turn of rope for jedi... Awesomeness 
 
 autocmd FileType python setlocal completeopt-=preview   " Disable the annoying docstring popup on completion 
 
+"let g:jedi#auto_initialization = 0  " Truns off function definition popup
 "http://unlogic.co.uk/2013/02/08/vim-as-a-python-ide/
+
+
+" Ctr-p settings
+nnoremap <F11> :CtrlP /Volumes/epsilon/lambda<cr>
+
+augroup NO_CURSOR_MOVE_ON_FOCUS
+  au!
+  au FocusLost * let g:oldmouse=&mouse | set mouse=
+  au FocusGained * if exists('g:oldmouse') | let &mouse=g:oldmouse | unlet g:oldmouse | endif
+augroup END
+

@@ -1,6 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/Users/santo/dotfiles/.vim'
 let g:netrw_dirhist_2='/Volumes'
 let g:netrw_dirhist_3='/Volumes/epsilon'
 let g:netrw_dirhist_4='/Volumes/epsilon/lambda/conf'
+let g:netrw_dirhist_5='/Volumes/epsilon/lambda/src/id/duke'
+let g:netrw_dirhist_6='/Volumes/epsilon/lambda/src/id/duke/views'
+let g:netrw_dirhist_7='/Volumes/epsilon/lambda/src/id/duke'
+let g:netrw_dirhist_8='/Volumes/epsilon/lambda/src/id'
