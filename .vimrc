@@ -1,11 +1,32 @@
-"""""Powerline settings
+if has("gui_running")
+   let s:uname = system("uname")
+   if s:uname == "Darwin\n"
+      set guifont=Inconsolata\ for\ Powerline:h15
+   endif
+endif
 
-"set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
 set laststatus=2
 
 """"""""""""" Vundle stuff """""""""""""""""
 set nocompatible              " be iMproved, required
 filetype off                  " required
+
+
+" ================ Persistent Undo ==================
+" Keep undo history across sessions, by storing in file.
+" Only works all the time.
+if has('persistent_undo')
+  silent !mkdir ~/.vim/backups > /dev/null 2>&1
+  set undodir=~/.vim/backups
+  set undofile
+endif
+
+" ================ Scrolling ========================
+
+set scrolloff=8         "Start scrolling when we're 8 lines away from margins
+set sidescrolloff=15
+set sidescroll=1
+
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -18,21 +39,25 @@ Plugin 'gmarik/Vundle.vim'
 
 Plugin 'Gundo'
 
+Plugin 'Lokaltog/powerline-fonts'
+
 Plugin 'solarized'
 
 "Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 Plugin 'bling/vim-airline'
 
+Plugin 'paranoida/vim-airlineish' "vim airline theme 
+
 Plugin 'tpope/vim-fugitive'
 
 Plugin 'The-NERD-tree'
 
+Plugin 'airblade/vim-gitgutter'
+
 Bundle 'klen/python-mode'
 
 Plugin 'ctrlp.vim'
-
-Plugin 'mhinz/vim-signify'
 
 Bundle 'git://github.com/davidhalter/jedi-vim'
 
@@ -92,6 +117,10 @@ cabbr <expr> bb expand(":CtrlPBuffer<CR>")
 
 nmap <F9> :SCCompile<cr>		" Map F9 and F10 for C++ simplecompile
 nmap <F10> :SCCompileRun<cr>
+nmap <F2> :cn<cr>
+nmap <S-F2> :cnfile<cr>
+nmap <F1> :cp<cr>
+nmap <S-F1> :cpfile<cr>
 
 "Maps ,(l)cd to change pwd to current file dir and prints it
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
@@ -129,7 +158,6 @@ let g:ctrlp_max_height = 20
 
 let g:ctrlp_max_files = 500000
 
-unlet g:ctrlp_custom_ignore
 let g:ctrlp_custom_ignore = {
   \ 'dir': '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|installer\|tmp$',
   \ 'file': '\v\.(exe|so|dll|js|pyc|css|html|ttf|jpeg|gif|mustache|png|md|wf)$' }
@@ -185,6 +213,16 @@ let g:pymode_breakpoint_bind = '<leader>pdb'
 
 let g:pymode_rope = 0  " Turn of rope for jedi... Awesomeness 
 
+let g:airline_powerline_fonts = 1
+
+unlet g:airline#extensions#tabline#enabled 
+let g:airline#extensions#tabline#enabled = 1  "Turn on tabline buffer on top
+
+unlet g:airline#extensions#tabline#left_sep
+let g:airline#extensions#tabline#left_sep = ' '
+unlet g:airline#extensions#tabline#left_alt_sep
+let g:airline#extensions#tabline#left_alt_sep = '>'
+
 autocmd FileType python setlocal completeopt-=preview   " Disable the annoying docstring popup on completion 
 
 "let g:jedi#auto_initialization = 0  " Truns off function definition popup
@@ -194,9 +232,21 @@ autocmd FileType python setlocal completeopt-=preview   " Disable the annoying d
 " Ctr-p settings
 nnoremap <F11> :CtrlP /Volumes/epsilon/lambda<cr>
 
+let g:airline_theme = 'airlineish'
+
+
 augroup NO_CURSOR_MOVE_ON_FOCUS
   au!
   au FocusLost * let g:oldmouse=&mouse | set mouse=
   au FocusGained * if exists('g:oldmouse') | let &mouse=g:oldmouse | unlet g:oldmouse | endif
 augroup END
+
+
+" Powerline settings
+set guifont=Inconsolata\ for\ Powerline:h14
+let g:Powerline_symbols = 'fancy'
+set encoding=utf-8
+set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
+set termencoding=utf-8
 
