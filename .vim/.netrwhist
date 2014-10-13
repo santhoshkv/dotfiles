@@ -1,5 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_cnt =9
 let g:netrw_dirhist_1='/Volumes/epsilon'
 let g:netrw_dirhist_2='/Volumes/epsilon/lambda'
 let g:netrw_dirhist_3='/Volumes/epsilon/lambda/installer'
@@ -8,3 +8,4 @@ let g:netrw_dirhist_5='/Volumes/epsilon/lambda/src'
 let g:netrw_dirhist_6='/Volumes/epsilon/lambda/src/id'
 let g:netrw_dirhist_7='/Users/santo'
 let g:netrw_dirhist_8='/Users/santo/dotfiles/.vim'
+let g:netrw_dirhist_9='/Volumes/epsilon/lambda/src/id/zaffi/server/views'

@@ -243,7 +243,7 @@ augroup END
 
 
 " Powerline settings
-set guifont=Inconsolata\ for\ Powerline:h14
+set guifont=Source\ Code\ Pro\ for\ Powerline:h12
 let g:Powerline_symbols = 'fancy'
 set encoding=utf-8
 set t_Co=256
