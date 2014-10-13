@@ -39,8 +39,6 @@ Plugin 'gmarik/Vundle.vim'
 
 Plugin 'Gundo'
 
-Plugin 'Lokaltog/powerline-fonts'
-
 Plugin 'solarized'
 
 "Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
