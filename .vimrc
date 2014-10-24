@@ -7,6 +7,8 @@ endif
 
 set laststatus=2
 
+set diffopt+=vertical " Set Gdiff to vertical
+
 """"""""""""" Vundle stuff """""""""""""""""
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -107,6 +109,13 @@ set hidden				" Hides buffers instead of closing them preventing unsaved changes
 set nobackup		" No backup 
 set noswapfile
 
+
+
+" resize current buffer by +/- 5 
+nnoremap <S-left> :vertical resize -5<cr>
+nnoremap <S-down> :resize -5<cr>
+nnoremap <S-up> :resize +5<cr>
+nnoremap <S-right> :vertical resize +5<cr>
 
 cabbr <expr> ,, expand("/Volumes/epsilon/lambda")
 cabbr <expr> zz expand(":GundoToggle<CR>")
@@ -247,4 +256,5 @@ set encoding=utf-8
 set t_Co=256
 set fillchars+=stl:\ ,stlnc:\
 set termencoding=utf-8
+
 
