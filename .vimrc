@@ -1,3 +1,8 @@
+let &t_ti.="\e[1 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+let &t_te.="\e[0 q"
+
 if has("gui_running")
    let s:uname = system("uname")
    if s:uname == "Darwin\n"
@@ -40,6 +45,8 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'Gundo'
+
+Plugin 'Lokaltog/powerline-fonts'
 
 Plugin 'solarized'
 
@@ -222,12 +229,9 @@ let g:pymode_rope = 0  " Turn of rope for jedi... Awesomeness
 
 let g:airline_powerline_fonts = 1
 
-unlet g:airline#extensions#tabline#enabled 
 let g:airline#extensions#tabline#enabled = 1  "Turn on tabline buffer on top
 
-unlet g:airline#extensions#tabline#left_sep
 let g:airline#extensions#tabline#left_sep = ' '
-unlet g:airline#extensions#tabline#left_alt_sep
 let g:airline#extensions#tabline#left_alt_sep = '>'
 
 autocmd FileType python setlocal completeopt-=preview   " Disable the annoying docstring popup on completion 
