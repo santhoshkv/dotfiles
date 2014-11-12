@@ -1,15 +1,6 @@
-[submodule ".vim/bundle/vim-sensible"]
-	path = .vim/bundle/vim-sensible
-	url = git://github.com/tpope/vim-sensible.git
-[submodule ".vim/bundle/vim-pathogen"]
-	path = .vim/bundle/vim-pathogen
-	url = https://github.com/tpope/vim-pathogen.git
-[submodule ".vim/bundle/vim-surround"]
-	path = .vim/bundle/vim-surround
-	url = git://github.com/tpope/vim-surround.git
 [submodule "powerline-fonts"]
-	path = powerline-fonts
+	path = .vim/bundle/powerline-fonts
 	url = https://github.com/Lokaltog/powerline-fonts.git
-[submodule ".vim/bundle/Vundle.vim"]
-	path = .vim/bundle/Vundle.vim
-	url = git://github.com/gmarik/Vundle.vim
+[submodule "bundle/vundle"]
+	path = .vim/bundle/vundle
+	url = http://github.com/gmarik/vundle.git
