@@ -176,6 +176,10 @@ let g:ctrlp_custom_ignore = {
   \ 'dir': '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|installer\|tmp$',
   \ 'file': '\v\.(exe|so|dll|js|pyc|css|html|ttf|jpeg|gif|mustache|png|md|wf)$' }
 
+set clipboard+=unnnamed " user the clipboards of vim and win
+set paste		" Pase from a window or from vim
+set go+=a		" Visual select automatically copied to clipboard
+
 """""""""""""" Python Mode
 
 
