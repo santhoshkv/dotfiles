@@ -72,6 +72,10 @@ Plugin 'xuhdev/SingleCompile'
 
 Plugin 'duff/vim-scratch'
 
+Plugin 'pathogen'
+
+Plugin 'Syntastic'
+
 "" The following are examples of different formats supported.
 "" Keep Plugin commands between vundle#begin/end.
 "" plugin on GitHub repo
@@ -174,7 +178,7 @@ let g:ctrlp_max_files = 500000
 
 let g:ctrlp_custom_ignore = {
   \ 'dir': '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|installer\|tmp$',
-  \ 'file': '\v\.(exe|so|dll|js|pyc|css|html|ttf|jpeg|gif|mustache|png|md|wf)$' }
+  \ 'file': '\v\.(exe|so|dll|pyc|css|ttf|jpeg|gif|mustache|png|md|wf)$' }
 
 """""""""""""" Python Mode
 
@@ -245,6 +249,9 @@ nnoremap <F11> :CtrlP /Volumes/epsilon/lambda<cr>
 
 let g:airline_theme = 'airlineish'
 
+" Map <leader>l to close localtion list
+nnoremap <Leader>l :lclose<cr>
+
 
 augroup NO_CURSOR_MOVE_ON_FOCUS
   au!
@@ -260,5 +267,3 @@ set encoding=utf-8
 set t_Co=256
 set fillchars+=stl:\ ,stlnc:\
 set termencoding=utf-8
-
-
