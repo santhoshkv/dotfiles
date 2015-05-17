@@ -76,6 +76,8 @@ Plugin 'pathogen'
 
 Plugin 'Syntastic'
 
+Plugin 'majutsushi/tagbar'
+
 "" The following are examples of different formats supported.
 "" Keep Plugin commands between vundle#begin/end.
 "" plugin on GitHub repo
@@ -139,6 +141,10 @@ nmap <F2> :cn<cr>
 nmap <S-F2> :cnfile<cr>
 nmap <F1> :cp<cr>
 nmap <S-F1> :cpfile<cr>
+
+nnoremap <F8> :TagbarToggle<CR>
+
+
 
 "Maps ,(l)cd to change pwd to current file dir and prints it
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
