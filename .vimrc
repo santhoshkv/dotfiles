@@ -72,8 +72,6 @@ Plugin 'xuhdev/SingleCompile'
 
 Plugin 'duff/vim-scratch'
 
-Plugin 'pathogen'
-
 Plugin 'Syntastic'
 
 Plugin 'majutsushi/tagbar'
