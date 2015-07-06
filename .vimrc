@@ -76,6 +76,11 @@ Plugin 'Syntastic'
 
 Plugin 'majutsushi/tagbar'
 
+Plugin 'pangloss/vim-javascript'
+
+Plugin 'nathanaelkane/vim-indent-guides'
+
+
 "" The following are examples of different formats supported.
 "" Keep Plugin commands between vundle#begin/end.
 "" plugin on GitHub repo
@@ -271,3 +276,9 @@ set encoding=utf-8
 set t_Co=256
 set fillchars+=stl:\ ,stlnc:\
 set termencoding=utf-8
+
+autocmd Filetype javascript setlocal ts=4 sts=4 sw=4 expandtab
+autocmd Filetype js setlocal ts=4 sts=4 sw=4 expandtab
+highlight SpecialKey ctermfg=1
+set list
+set listchars=tab:T>
