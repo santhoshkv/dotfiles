@@ -282,3 +282,7 @@ autocmd Filetype js setlocal ts=4 sts=4 sw=4 expandtab
 highlight SpecialKey ctermfg=1
 set list
 set listchars=tab:T>
+set mouse=a
+" Must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
+set ttymouse=xterm2
+vmap <C-c> "+y
