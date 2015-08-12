@@ -80,6 +80,7 @@ Plugin 'pangloss/vim-javascript'
 
 Plugin 'nathanaelkane/vim-indent-guides'
 
+Plugin 'elzr/vim-json' " For json stuff
 
 "" The following are examples of different formats supported.
 "" Keep Plugin commands between vundle#begin/end.
@@ -133,13 +134,13 @@ nnoremap <S-down> :resize -5<cr>
 nnoremap <S-up> :resize +5<cr>
 nnoremap <S-right> :vertical resize +5<cr>
 
-cabbr <expr> ,, expand("/Volumes/epsilon/lambda")
+cabbr <expr> ,l expand("/Volumes/epsilon_share/lambda")
+cabbr <expr> ,c expand("/Volumes/epsilon_share/calm")
+cabbr <expr> ,o expand("/Volumes/epsilon_share/cloud")
 cabbr <expr> zz expand(":GundoToggle<CR>")
 cabbr <expr> xx expand(":NERDTreeToggle<CR>")
 cabbr <expr> bb expand(":CtrlPBuffer<CR>")
 
-nmap <F9> :SCCompile<cr>		" Map F9 and F10 for C++ simplecompile
-nmap <F10> :SCCompileRun<cr>
 nmap <F2> :cn<cr>
 nmap <S-F2> :cnfile<cr>
 nmap <F1> :cp<cr>
@@ -255,6 +256,7 @@ autocmd FileType python setlocal completeopt-=preview   " Disable the annoying d
 
 " Ctr-p settings
 nnoremap <F11> :CtrlP /Volumes/epsilon/lambda<cr>
+nnoremap <F10> :CtrlP pwd<cr>
 
 let g:airline_theme = 'airlineish'
 
@@ -279,6 +281,7 @@ set termencoding=utf-8
 
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4 expandtab
 autocmd Filetype js setlocal ts=4 sts=4 sw=4 expandtab
+autocmd Filetype json setlocal ts=2 sts=2 sw=2 expandtab
 highlight SpecialKey ctermfg=1
 set list
 set listchars=tab:T>
