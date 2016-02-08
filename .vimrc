@@ -82,6 +82,8 @@ Plugin 'nathanaelkane/vim-indent-guides'
 
 Plugin 'elzr/vim-json' " For json stuff
 
+Plugin 'tomasr/molokai'
+
 "" The following are examples of different formats supported.
 "" Keep Plugin commands between vundle#begin/end.
 "" plugin on GitHub repo
@@ -171,7 +173,9 @@ endif
 " solarized settings
 syntax enable
 set background=dark 			" Colour scheme
-colorscheme solarized
+"colorscheme solarized
+let g:molokai_original = 1
+colorscheme molokai
 set ruler				" Turns on ruler
 
 let NERDTreeIgnore = ['\.pyc$','\.js$','\.css$','\.html$']
@@ -187,7 +191,7 @@ let g:ctrlp_max_height = 20
 let g:ctrlp_max_files = 500000
 
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|installer\|tmp$',
+  \ 'dir': '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|installer\|node_modules\|build\|tmp$',
   \ 'file': '\v\.(exe|so|dll|pyc|css|ttf|jpeg|gif|mustache|png|md|wf)$' }
 
 """""""""""""" Python Mode
@@ -261,7 +265,7 @@ nnoremap <F10> :CtrlP pwd<cr>
 let g:airline_theme = 'airlineish'
 
 " Map <leader>l to close localtion list
-nnoremap <Leader>l :lclose<cr>
+nnoremap <leader>l :lclose<cr>
 
 
 augroup NO_CURSOR_MOVE_ON_FOCUS
@@ -289,3 +293,5 @@ set mouse=a
 " Must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
 set ttymouse=xterm2
 vmap <C-c> "+y
+set statusline+=col:\ %c, " col line goodness
+set smartcase  " case sensitive search only when searching for uppercases
