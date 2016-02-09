@@ -12,12 +12,37 @@ endif
 
 set laststatus=2
 
+"Load nvim from diff config file
+if has('nvim')
+    let s:editor_root=expand("~/.nvim")
+else
+    let s:editor_root=expand("~/.vim")
+endif
+
+"Python stuff
+if has("unix")
+    let s:uname = system("uname")
+    let g:python_host_prog='/usr/bin/python'
+    if s:uname == "Darwin\n"
+        let g:python_host_prog='/usr/bin/python'
+    endif
+endif
+
+" Setting up Vundle - the vim plugin bundler
+let vundle_installed=1
+let vundle_readme=s:editor_root . '/bundle/vundle/README.md'
+if !filereadable(vundle_readme)
+    echo "Installing Vundle.."
+    echo ""
+    " silent execute "! mkdir -p ~/." . s:editor_path_name . "/bundle"
+    silent call mkdir(s:editor_root . '/bundle', "p")
+    silent execute "!git clone https://github.com/gmarik/vundle " . s:editor_root . "/bundle/vundle"
+    let vundle_installed=0
+endif
+let &rtp = &rtp . ',' . s:editor_root . '/bundle/vundle/'
+call vundle#rc(s:editor_root . '/bundle')
+
 set diffopt+=vertical " Set Gdiff to vertical
-
-""""""""""""" Vundle stuff """""""""""""""""
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
 
 " ================ Persistent Undo ==================
 " Keep undo history across sessions, by storing in file.
@@ -83,6 +108,20 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'elzr/vim-json' " For json stuff
 
 Plugin 'tomasr/molokai'
+
+Plugin 'NLKNguyen/papercolor-theme'
+
+
+if vundle_installed == 0
+    echo "Installing Bundles, please ignore key map error messages"
+    echo ""
+    :BundleInstall
+    """"""""""""" Vundle stuff """""""""""""""""
+    set nocompatible              " be iMproved, required
+    filetype off                  " required
+endif
+
+
 
 "" The following are examples of different formats supported.
 "" Keep Plugin commands between vundle#begin/end.
@@ -172,12 +211,17 @@ endif
 
 " solarized settings
 syntax enable
-set background=dark 			" Colour scheme
-"colorscheme solarized
-let g:molokai_original = 1
-colorscheme molokai
-set ruler				" Turns on ruler
 
+
+"""""""""""""""""""""""""  COLOR SETTING """"""""""""""""""""""""""""""""""""
+set t_Co=256   " This is may or may not needed.
+
+set background=dark
+colorscheme PaperColor
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set ruler				" Turns on ruler
 let NERDTreeIgnore = ['\.pyc$','\.js$','\.css$','\.html$']
 
 let g:ctrlp_working_path_mode = 'ra'
