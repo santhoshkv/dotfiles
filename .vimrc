@@ -19,7 +19,7 @@ else
     let s:editor_root=expand("~/.vim")
 endif
 
-"Python stuff
+"Python stuff switch for mac and unix
 if has("unix")
     let s:uname = system("uname")
     let g:python_host_prog='/usr/bin/python'
@@ -39,6 +39,7 @@ if !filereadable(vundle_readme)
     silent execute "!git clone https://github.com/gmarik/vundle " . s:editor_root . "/bundle/vundle"
     let vundle_installed=0
 endif
+" Set/copyfilesfrom default bundle dir from vim to neovim
 let &rtp = &rtp . ',' . s:editor_root . '/bundle/vundle/'
 call vundle#rc(s:editor_root . '/bundle')
 
@@ -107,7 +108,7 @@ Plugin 'nathanaelkane/vim-indent-guides'
 
 Plugin 'elzr/vim-json' " For json stuff
 
-Plugin 'tomasr/molokai'
+Plugin 'sickill/vim-monokai'
 
 Plugin 'NLKNguyen/papercolor-theme'
 
@@ -217,7 +218,8 @@ syntax enable
 set t_Co=256   " This is may or may not needed.
 
 set background=dark
-colorscheme PaperColor
+"colorscheme PaperColor
+colorscheme monokai
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -310,6 +312,7 @@ let g:airline_theme = 'airlineish'
 
 " Map <leader>l to close localtion list
 nnoremap <leader>l :lclose<cr>
+nnoremap <C-w><C-w> : lclose<cr> <C-w>w
 
 
 augroup NO_CURSOR_MOVE_ON_FOCUS
