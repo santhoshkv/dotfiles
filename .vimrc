@@ -112,6 +112,8 @@ Plugin 'sickill/vim-monokai'
 
 Plugin 'NLKNguyen/papercolor-theme'
 
+Plugin 'stefandtw/quickfix-reflector.vim'
+
 
 if vundle_installed == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -155,6 +157,17 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+"""""""""""""""""""""""""  COLOR SETTING """"""""""""""""""""""""""""""""""""
+set t_Co=256   " This is may or may not needed.
+
+set background=dark
+"colorscheme PaperColor
+colorscheme monokai
+hi Search cterm=NONE ctermfg=grey ctermbg=125
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set incsearch				" Turns on incremental search
 set hlsearch				" Turns on search highlighting 
 set history=1000			" Limit for command history
@@ -188,6 +201,12 @@ nmap <S-F2> :cnfile<cr>
 nmap <F1> :cp<cr>
 nmap <S-F1> :cpfile<cr>
 
+nmap 1 :cp<cr>
+nmap 2 :cn<cr>
+
+nmap <C-m> :cp<cr>
+nmap <C-n> :cn<cr>
+
 nnoremap <F8> :TagbarToggle<CR>
 
 
@@ -214,15 +233,6 @@ endif
 syntax enable
 
 
-"""""""""""""""""""""""""  COLOR SETTING """"""""""""""""""""""""""""""""""""
-set t_Co=256   " This is may or may not needed.
-
-set background=dark
-"colorscheme PaperColor
-colorscheme monokai
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 set ruler				" Turns on ruler
 let NERDTreeIgnore = ['\.pyc$','\.js$','\.css$','\.html$']
 
@@ -237,13 +247,14 @@ let g:ctrlp_max_height = 20
 let g:ctrlp_max_files = 500000
 
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|installer\|node_modules\|build\|tmp$',
+  \ 'dir': '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|installer\|node_modules\|build\|main-NH4\|tmp$',
   \ 'file': '\v\.(exe|so|dll|pyc|css|ttf|jpeg|gif|mustache|png|md|wf)$' }
 
 """""""""""""" Python Mode
 
 
 " Python-mode
+"  \ 'dir': '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|installer\|node_modules\|/home/epsilon/calm\|/home/epsilon/lambda\|/home/epsilon/cloud\|build\|tmp$',
 " Activate rope
 " Keys:
 " K             Show python docs
@@ -302,11 +313,44 @@ autocmd FileType python setlocal completeopt-=preview   " Disable the annoying d
 
 "let g:jedi#auto_initialization = 0  " Truns off function definition popup
 "http://unlogic.co.uk/2013/02/08/vim-as-a-python-ide/
+"
+"
+" Following settings are for quickfix reflector.vim
+" If 1, automatically sets quickfix buffers 'modifiable'. If you prefer to do
+" this manually, set the value to 0. Default: 1.
+"
+let g:qf_modifiable = 1
+" If 1, changes within a single buffer will be joined using |:undojoin|,
+" allowing them to be undone as a unit. Default: 0.
+let g:qf_join_changes = 0
+"
+"
+" If 1, writing the quickfix buffer will also write corresponding files. If 0,
+" buffers of corresponding files will be changed but not written, allowing you
+" to preview the changes before writing the individual buffers yourself.
+" Default: 1
 
+let g:qf_write_changes = 0
+
+function! SetQuickFixEditOptions()
+	:let &l:qf_modifiable = 1
+	:let &l:qf_join_changes = 1
+	:let &l:qf_write_changes = 1
+	echom "Quickfix list is now editable and writeable"
+endfunction
+
+function! UnSetQuickFixEditOptions()
+	:let &l:qf_modifiable = 0
+	:let &l:qf_join_changes = 0
+	:let &l:qf_write_changes = 0
+	echom "Quickfix list changed to NOT eitable"
+endfunction
+
+nnoremap <leader>eq :call SetQuickFixEditOptions()
+nnoremap <leader>neq :call UnSetQuickFixEditOptions()
 
 " Ctr-p settings
-nnoremap <F11> :CtrlP /Volumes/epsilon/lambda<cr>
-nnoremap <F10> :CtrlP pwd<cr>
+nnoremap <F10> :CtrlP /home/epsilon<cr>
 
 let g:airline_theme = 'airlineish'
 
@@ -342,3 +386,11 @@ set ttymouse=xterm2
 vmap <C-c> "+y
 set statusline+=col:\ %c, " col line goodness
 set smartcase  " case sensitive search only when searching for uppercases
+
+"autocmd FileType yaml call SetYamlOptions()
+"
+"function SetYamlOptions()
+"		setlocal ai ts=2 sw=2 et
+"			set foldmethod=indent
+"		endfunction
+"" vimgrep /path_to_command/gj ./**/*.rb 
