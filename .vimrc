@@ -114,10 +114,6 @@ Plugin 'NLKNguyen/papercolor-theme'
 
 Plugin 'stefandtw/quickfix-reflector.vim'
 
-Plugin 'fatih/vim-go'
-
-Plugin 'farazdagi/vim-go-ide'
-
 
 if vundle_installed == 0
     echo "Installing Bundles, please ignore key map error messages"
