@@ -114,6 +114,8 @@ Plugin 'NLKNguyen/papercolor-theme'
 
 Plugin 'stefandtw/quickfix-reflector.vim'
 
+Plugin 'fatih/vim-go'
+
 
 if vundle_installed == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -196,10 +198,6 @@ cabbr <expr> zz expand(":GundoToggle<CR>")
 cabbr <expr> xx expand(":NERDTreeToggle<CR>")
 cabbr <expr> bb expand(":CtrlPBuffer<CR>")
 
-nmap <F2> :cn<cr>
-nmap <S-F2> :cnfile<cr>
-nmap <F1> :cp<cr>
-nmap <S-F1> :cpfile<cr>
 
 nmap 1 :cp<cr>
 nmap 2 :cn<cr>
@@ -387,10 +385,46 @@ vmap <C-c> "+y
 set statusline+=col:\ %c, " col line goodness
 set smartcase  " case sensitive search only when searching for uppercases
 
-"autocmd FileType yaml call SetYamlOptions()
+autocmd FileType go call SetGoOptions()
+
+function! SetGoOptions ()
+	set nolist
+	let g:go_highlight_fields = 1
+	let g:go_highlight_functions = 1
+	let g:go_highlight_types = 1
+	autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+	noremap <C-b> :GoDeclsDir<cr>
+
+	set omnifunc=syntaxcomplete#Complete
+	if has("gui_running")
+	    " C-Space seems to work under gVim on both Linux and win32
+	    inoremap <C-Space> <C-n>
+	else " no gui
+	  if has("unix")
+	    inoremap <Nul> <C-n>
+	  else
+	  " I have no idea of the name of Ctrl-Space elsewhere
+	  endif
+	endif
+endfunction
+" vimgrep /path_to_command/gj ./**/*.rb 
 "
-"function SetYamlOptions()
-"		setlocal ai ts=2 sw=2 et
-"			set foldmethod=indent
-"		endfunction
-"" vimgrep /path_to_command/gj ./**/*.rb 
+"
+"
+" Some things from https://gist.github.com/millermedeiros/1262085
+
+" --- performance / buffer ---
+set hidden                  " can put buffer to the background without writing
+                            "   to disk, will remember history/marks.
+set lazyredraw              " don't update the display while executing macros
+set ttyfast                 " Send more characters at a given time.
+
+" --- history / file handling ---
+set history=999             " Increase history (default = 20)
+set undolevels=999          " Moar undo (default=100)
+
+" --- backup and swap files ---
+" annoying and unnecessary...
+set nobackup
+set nowritebackup
+set noswapfile
