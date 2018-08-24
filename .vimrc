@@ -267,23 +267,23 @@ let g:ctrlp_custom_ignore = {
 " ]M            Jump on next class or method (normal, visual, operator modes)
 
 " Documentation
-let g:pymode_doc = 1
-let g:pymode_doc_key = 'K'
+let g:pymode_doc = 0
 
 "Linting
 let g:pymode_lint = 1
 let g:pymode_lint_checker = "pyflakes,pep8"
+" Check code on every save (if file has been modified)
+let g:pymode_lint_on_write = 1
+"Show error message if cursor placed at the error line
+let g:pymode_lint_message = 1
 " Auto check on save
 
 
 " Auto check on fly
-let g:pymode_lint_on_fly = 1
+let g:pymode_lint_on_fly = 0
 
 " Support virtualenv
 let g:pymode_virtualenv = 1
-
-" Enable breakpoints plugin
-let g:pymode_breakpoint = 1
 
 " syntax highlighting
 let g:pymode_syntax = 1
