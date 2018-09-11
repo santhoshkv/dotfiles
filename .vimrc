@@ -80,7 +80,7 @@ Plugin 'solarized'
 
 Plugin 'bling/vim-airline'
 
-Plugin 'paranoida/vim-airlineish' "vim airline theme 
+Plugin 'vim-airline/vim-airline-themes'
 
 Plugin 'tpope/vim-fugitive'
 
@@ -300,12 +300,13 @@ let g:pymode_breakpoint_bind = '<leader>pdb'
 
 let g:pymode_rope = 0  " Turn of rope for jedi... Awesomeness 
 
+let g:airline_extensions = ['branch']
+
+let g:airline_highlighting_cache = 1
+
 let g:airline_powerline_fonts = 1
+"let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
-let g:airline#extensions#tabline#enabled = 1  "Turn on tabline buffer on top
-
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '>'
 
 autocmd FileType python setlocal completeopt-=preview   " Disable the annoying docstring popup on completion 
 
@@ -350,8 +351,6 @@ nnoremap <leader>neq :call UnSetQuickFixEditOptions()
 " Ctr-p settings
 nnoremap <F10> :CtrlP /home/epsilon<cr>
 
-let g:airline_theme = 'airlineish'
-
 " Map <leader>l to close localtion list
 nnoremap <leader>l :lclose<cr>
 nnoremap <C-w><C-w> : lclose<cr> <C-w>w
@@ -382,7 +381,6 @@ set mouse=a
 " Must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
 set ttymouse=xterm2
 vmap <C-c> "+y
-set statusline+=col:\ %c, " col line goodness
 set smartcase  " case sensitive search only when searching for uppercases
 
 autocmd FileType go call SetGoOptions()
@@ -428,3 +426,6 @@ set undolevels=999          " Moar undo (default=100)
 set nobackup
 set nowritebackup
 set noswapfile
+set completeopt=longest,menuone
+let g:airline_solarized_bg='dark'
+let g:airline_theme='base16'
