@@ -116,6 +116,8 @@ Plugin 'stefandtw/quickfix-reflector.vim'
 
 Plugin 'fatih/vim-go'
 
+Plugin 'vim-yaml-folds'
+
 
 if vundle_installed == 0
     echo "Installing Bundles, please ignore key map error messages"
