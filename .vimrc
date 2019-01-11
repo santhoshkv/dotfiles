@@ -87,6 +87,7 @@ hi Search cterm=NONE ctermfg=grey ctermbg=125
 
 
 nnoremap <F10> :CtrlP /home/epsilon<cr>
+nnoremap <F11> :CtrlP /home/epsilon/policy-engine<cr>
 
 " Map <leader>l to close localtion list
 nnoremap <leader>l :lclose<cr>
@@ -178,6 +179,8 @@ set tabstop=4
 set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
+" Set backspace to default behaviour
+set backspace=2
 
 
 
@@ -222,8 +225,24 @@ let g:ctrlp_max_height = 20
 let g:ctrlp_max_files = 500000
 
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|installer\|node_modules\|build\|main-NH4\|tmp$',
+  \ 'dir': '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|installer\|node_modules\|build\|main-NH4\|tmp\|vendor$',
   \ 'file': '\v\.(exe|so|dll|pyc|css|ttf|jpeg|gif|mustache|png|md|wf|svg)$' }
+
+
+"#########################################################
+"##################  GO settings #####################
+"#########################################################
+"
+
+au! BufNewFile,BufRead *.go call s:FTgo()
+function! s:FTgo()
+    setlocal noexpandtab tabstop=4 shiftwidth=4
+    set nolist
+    set autowrite
+    nmap <leader>b  <Plug>(go-build)
+    nmap <leader>r  <Plug>(go-run)
+    let g:go_list_type = "quickfix"
+endfunction
 
 "##################  vim-go settings ###################
 let g:go_highlight_format_strings = 1
