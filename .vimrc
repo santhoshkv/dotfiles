@@ -94,10 +94,8 @@ set background=dark
 colorscheme monokai
 hi Search cterm=NONE ctermfg=grey ctermbg=125
 "hi Normal ctermbg=grey ctermfg=Black guifg=Black guibg=grey
+"
 
-
-nnoremap <F10> :CtrlP /home/epsilon<cr>
-nnoremap <F11> :CtrlP /home/epsilon/policy-engine<cr>
 
 " Map <leader>l to close localtion list
 nnoremap <leader>l :lclose<cr>
@@ -224,7 +222,17 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 "##################  CTRLP settings ###################
 "
+
+
+nnoremap <F10> :CtrlP /home/epsilon<cr>
+nnoremap <leader>ep :CtrlP /home/epsilon<cr>
+nnoremap <leader>po :CtrlP /home/policy<cr>
+
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_max_files=0
+let g:ctrlp_max_depth=40
+
 "When invoked, unless a starting directory is specified, CtrlP will set its local working directory according to this variable'c' - the directory of the current file. 'r' - the nearest ancestor that contains one of these directories or files: .git .hg .svn .bzr _darcs 'a' - like c, but only if the current working directory outside of CtrlP is not a direct ancestor of the directory of the current file. 0 or '' (empty string) - disable this feature.
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
@@ -235,8 +243,9 @@ let g:ctrlp_max_height = 20
 let g:ctrlp_max_files = 500000
 
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|installer\|node_modules\|build\|main-NH4\|tmp\|vendor$',
+  \ 'dir': '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|installer\|node_modules\|pylint.d\|build\|main-NH4\|tmp\|.vim\|github.com\|vendor$',
   \ 'file': '\v\.(exe|so|dll|pyc|css|ttf|jpeg|gif|mustache|png|md|wf|svg)$' }
+
 
 
 "#########################################################
