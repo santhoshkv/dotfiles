@@ -76,6 +76,8 @@ Plug 'python-mode/python-mode', { 'branch': 'develop' }
 
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 
+Plug 'majutsushi/tagbar'
+
 call plug#end()
 
 
@@ -225,6 +227,7 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 
 nnoremap <F10> :CtrlP /home/epsilon<cr>
+nnoremap <F9> :CtrlPCurWD <cr>
 nnoremap <leader>ep :CtrlP /home/epsilon<cr>
 nnoremap <leader>po :CtrlP /home/policy<cr>
 
