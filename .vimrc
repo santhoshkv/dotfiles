@@ -280,6 +280,11 @@ let g:go_highlight_generate_tags = 1
 let g:go_highlight_variable_assignments = 1
 let g:go_highlight_variable_declarations = 1
 
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:go_autodetect_gopath = 1
+inoremap <C-Space> <C-x><C-o>
+inoremap <C-@> <C-Space>
 
 
 "#########################################################
