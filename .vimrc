@@ -246,7 +246,7 @@ let g:ctrlp_max_height = 20
 let g:ctrlp_max_files = 500000
 
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|installer\|node_modules\|pylint.d\|build\|main-NH4\|tmp\|.vim\|github.com\|vendor$',
+  \ 'dir': '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|installer\|node_modules\|pylint.d\|build\|main-NH4\|tmp\|.vim\|github.com\|vendor$',
   \ 'file': '\v\.(exe|so|dll|pyc|css|ttf|jpeg|gif|mustache|png|md|wf|svg)$' }
 
 
