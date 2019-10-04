@@ -78,6 +78,10 @@ Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 
 Plug 'majutsushi/tagbar'
 
+Plug 'tmhedberg/SimpylFold'
+
+Plug 'Konfekt/FastFold'
+
 call plug#end()
 
 
@@ -382,3 +386,7 @@ let g:pymode_options_max_line_length = 999
 let g:pymode_rope_completion = 0
 
 let g:pymode_python = 'python'
+
+" FOLD settings
+"
+set foldlevelstart=20
