@@ -15,9 +15,9 @@ endif
 "Python stuff switch for mac and unix
 if has("unix")
     let s:uname = system("uname")
-    let g:python_host_prog='/usr/bin/python'
+    let g:python_host_prog='python'
     if s:uname == "Darwin\n"
-        let g:python_host_prog='/usr/bin/python'
+        let g:python_host_prog='python'
     endif
 endif
 
@@ -55,6 +55,10 @@ endfunction
 call plug#begin('~/.vim/plugged')
 
 Plug 'sickill/vim-monokai'
+
+Plug 'phanviet/vim-monokai-pro'
+
+Plug 'altercation/vim-colors-solarized'
 
 Plug 'vim-scripts/Gundo'
 
@@ -94,11 +98,19 @@ call plug#end()
 "
 "#################### color settings
 "
-syntax enable
 set t_Co=256   " This is may or may not needed.
+set termguicolors
+syntax enable
 set background=dark
-colorscheme monokai
+"colorscheme monokai_pro
+colorscheme monokai_pro
+
+"syntax enable
+"set background=dark
+"colorscheme solarized
+
 hi Search cterm=NONE ctermfg=grey ctermbg=125
+
 "hi Normal ctermbg=grey ctermfg=Black guifg=Black guibg=grey
 "
 
@@ -284,6 +296,8 @@ let g:go_highlight_generate_tags = 1
 let g:go_highlight_variable_assignments = 1
 let g:go_highlight_variable_declarations = 1
 
+let g:go_bin_path = $GOBIN
+
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_autodetect_gopath = 1
@@ -379,11 +393,13 @@ let g:pymode_folding = 0
 
 let g:pymode_breakpoint_bind = '<leader>pdb'
 
-let g:pymode_rope = 0  " Turn of rope for jedi... Awesomeness
+let g:pymode_rope = 1
+let g:pymode_rope_completion = 1
+let g:pymode_rope_completion_bind = '<C-Space>'
+let g:pymode_rope_complete_on_dot = 0
 
 let g:pymode_options_max_line_length = 999
 
-let g:pymode_rope_completion = 0
 
 let g:pymode_python = 'python'
 
