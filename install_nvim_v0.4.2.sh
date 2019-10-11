@@ -6,7 +6,9 @@ chmod u+x nvim.appimage
 cp -r squashfs-root/usr/share/nvim/ /usr/share/
 cp squashfs-root/usr/bin/nvim /usr/bin/
 rm -rf squashfs
-activate && pip install --upgrade pynvim && pip3 install --upgrade pynvim 
+rm nvim.appimage*
+source /epsilon/venv/bin/activate
+pip install --upgrade pynvim && pip3 install --upgrade pynvim
 mkdir -p $HOME/.config/nvim/
 touch $HOME/.config/nvim/init.vim
 cat > $HOME/.config/nvim/init.vim <<EOF
