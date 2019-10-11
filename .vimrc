@@ -5,13 +5,6 @@ let &t_SI.="\e[5 q"
 let &t_EI.="\e[1 q"
 let &t_te.="\e[0 q"
 
-"Load nvim from diff config file
-if has('nvim')
-    let s:editor_root=expand("~/.nvim")
-else
-    let s:editor_root=expand("~/.vim")
-endif
-
 "Python stuff switch for mac and unix
 if has("unix")
     let s:uname = system("uname")
@@ -35,22 +28,11 @@ endif
 "#########################################################
 
 " Check and install vimplug
- if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+ if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-
-function! BuildYCM(info)
-  " info is a dictionary with 3 fields
-  " - name:   name of the plugin
-  " - status: 'installed', 'updated', or 'unchanged'
-  " - force:  set on PlugInstall! or PlugUpdate!
-  if a:info.status == 'installed' || a:info.force
-    !./install.py --go-completer
-  endif
-endfunction
-
 
 call plug#begin('~/.vim/plugged')
 
@@ -78,13 +60,23 @@ Plug 'w0rp/ale'
 
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
 
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-
 Plug 'majutsushi/tagbar'
 
 Plug 'tmhedberg/SimpylFold'
 
 Plug 'Konfekt/FastFold'
+
+Plug 'joshdick/onedark.vim'
+
+Plug 'sheerun/vim-polyglot'
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
 call plug#end()
 
@@ -98,16 +90,26 @@ call plug#end()
 "
 "#################### color settings
 "
-set t_Co=256   " This is may or may not needed.
-set termguicolors
+"
+""Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
 syntax enable
-set background=dark
+colorscheme onedark
 "colorscheme monokai_pro
-colorscheme monokai_pro
 
-"syntax enable
-"set background=dark
-"colorscheme solarized
 
 hi Search cterm=NONE ctermfg=grey ctermbg=125
 
@@ -135,8 +137,10 @@ set nobackup
 set nowritebackup
 set noswapfile
 set completeopt=longest,menuone
-let g:airline_solarized_bg='dark'
-let g:airline_theme='base16'
+"let g:airline_solarized_bg='dark'
+"let g:airline_theme='base16'
+let g:airline_theme='onedark'
+
 
 
 cabbr <expr> ,l expand("/Volumes/epsilon_share/lambda")
@@ -174,9 +178,6 @@ set nocompatible
 set laststatus=2
 set diffopt+=vertical " Set Gdiff to vertical
 
-set mouse=a
-" Must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
-set ttymouse=xterm2
 vmap <C-c> "+y
 set list
 set listchars=tab:T>
@@ -301,8 +302,8 @@ let g:go_bin_path = $GOBIN
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_autodetect_gopath = 1
-inoremap <C-Space> <C-x><C-o>
-inoremap <C-@> <C-Space>
+"inoremap <C-Space> <C-x><C-o>
+"inoremap <C-@> <C-Space>
 
 
 "#########################################################
@@ -313,41 +314,49 @@ let g:python_highlight_all = 1
 
 au BufNewFile,BufRead *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=99 expandtab autoindent fileformat=unix
 
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#disable_auto_complete = 1
+inoremap <expr> <C-Space>  deoplete#manual_complete()
+
 
 "##################  YCM settings ###################
-let g:ycm_auto_trigger = 0
-
-let g:ycm_semantic_triggers =  {
-            \   'c' : ['->', '.'],
-            \   'objc' : ['->', '.'],
-            \   'ocaml' : ['.', '#'],
-            \   'cpp,objcpp' : ['->', '.', '::'],
-            \   'perl' : ['->'],
-            \   'php' : ['->', '::', '"', "'", 'use ', 'namespace ', '\'],
-            \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
-            \   'html': ['<', '"', '</', ' '],
-            \   'vim' : ['re![_a-za-z]+[_\w]*\.'],
-            \   'ruby' : ['.', '::'],
-            \   'lua' : ['.', ':'],
-            \   'erlang' : [':'],
-            \   'haskell' : ['.', 're!.']
-            \ }
-
-let g:ycm_python_interpreter_path = '/venv/bin/python'
-let g:ycm_python_sys_path = []
-let g:ycm_extra_conf_vim_data = [
-  \  'g:ycm_python_interpreter_path',
-  \  'g:ycm_python_sys_path'
-  \]
-let g:ycm_global_ycm_extra_conf = '~/dotfiles/global_extra_conf.py'
-
-let g:ycm_key_list_select_completion = ['<TAB>']
-let g:ycm_key_list_previous_completion = ['<S-TAB>']
-let g:ycm_key_list_stop_completion = ['<C-y>', '<CR>']
-
-let g:ycm_seed_identifiers_with_syntax = 1
-
-
+"let g:ycm_auto_trigger = 0
+"
+"let g:ycm_semantic_triggers =  {
+"            \   'c' : ['->', '.'],
+"            \   'objc' : ['->', '.'],
+"            \   'ocaml' : ['.', '#'],
+"            \   'cpp,objcpp' : ['->', '.', '::'],
+"            \   'perl' : ['->'],
+"            \   'php' : ['->', '::', '"', "'", 'use ', 'namespace ', '\'],
+"            \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
+"            \   'html': ['<', '"', '</', ' '],
+"            \   'vim' : ['re![_a-za-z]+[_\w]*\.'],
+"            \   'ruby' : ['.', '::'],
+"            \   'lua' : ['.', ':'],
+"            \   'erlang' : [':'],
+"            \   'haskell' : ['.', 're!.']
+"            \ }
+"
+"let g:ycm_python_interpreter_path = '/venv/bin/python'
+"let g:ycm_python_sys_path = []
+"let g:ycm_extra_conf_vim_data = [
+"  \  'g:ycm_python_interpreter_path',
+"  \  'g:ycm_python_sys_path'
+"  \]
+"let g:ycm_global_ycm_extra_conf = '~/dotfiles/global_extra_conf.py'
+"
+"let g:ycm_key_list_select_completion = ['<TAB>']
+"let g:ycm_key_list_previous_completion = ['<S-TAB>']
+"let g:ycm_key_list_stop_completion = ['<C-y>', '<CR>']
+"
+"let g:ycm_seed_identifiers_with_syntax = 1
+"let g:ycm_filetype_specific_completion_to_disable = {
+"      \ 'gitcommit': 1,
+"      \ 'python': 1
+"      \}
+"
+"
 """""""""""""" Python Mode
 
 
@@ -393,15 +402,31 @@ let g:pymode_folding = 0
 
 let g:pymode_breakpoint_bind = '<leader>pdb'
 
-let g:pymode_rope = 1
-let g:pymode_rope_completion = 1
-let g:pymode_rope_completion_bind = '<C-Space>'
+let g:pymode_rope = 0
+let g:pymode_rope_completion = 0
 let g:pymode_rope_complete_on_dot = 0
+let g:pymode_rope_lookup_project = 0
+
+
 
 let g:pymode_options_max_line_length = 999
 
 
 let g:pymode_python = 'python'
+
+"autocmd FileType python setlocal completeopt-=preview
+"
+"let g:jedi#popup_on_dot = 0
+"let g:jedi#goto_command = "gd"
+"let g:jedi#goto_assignments_command = "<leader>g"
+"let g:jedi#goto_definitions_command = "gd"
+"let g:jedi#documentation_command = "K"
+"let g:jedi#usages_command = "<leader>n"
+"let g:jedi#completions_command = "<C-Space>"
+"let g:jedi#rename_command = "<leader>r"
+"let g:jedi#popup_select_first = 0
+"let g:jedi#show_call_signatures = "0"
+"
 
 " FOLD settings
 "
