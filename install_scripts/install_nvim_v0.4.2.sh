@@ -15,6 +15,6 @@ touch $HOME/.config/nvim/init.vim
 cat > $HOME/.config/nvim/init.vim <<EOF
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
-source ~/dotfiles/.vimrc
+source ~/dotfiles/nvim/.vimrc
 EOF
 fi

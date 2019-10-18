@@ -10,5 +10,5 @@
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
-  - [./add_bash_extras.sh]
-  - [./install_nvim_v0.4.2.sh]
+  - [./install_scripts/add_bash_extras.sh]
+  - [./install_scripts/install_nvim_v0.4.2.sh]

@@ -5,7 +5,6 @@ export TERM=xterm-256color
 
 # User specific aliases and functions
 # Run twolfson/sexy-bash-prompt
-. ~/dotfiles/.bash_prompt
-. ~/dotfiles/.bash_conf
-
+. ~/dotfiles/bash/.bash_prompt
+. ~/dotfiles/bash/.bash_conf
 EOF
