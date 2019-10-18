@@ -1,4 +1,5 @@
 #!/bin/sh
+if type nvim > /dev/null 2>&1; then
 cd $HOME
 wget https://github.com/neovim/neovim/releases/download/v0.4.2/nvim.appimage
 chmod u+x nvim.appimage
@@ -16,3 +17,4 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/dotfiles/.vimrc
 EOF
+fi

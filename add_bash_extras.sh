@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cat > $HOME/.bashrc <<EOF
+cat >> $HOME/.bashrc <<EOF
 export TERM=xterm-256color
 
 # User specific aliases and functions
