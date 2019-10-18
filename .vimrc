@@ -5,15 +5,6 @@ let &t_SI.="\e[5 q"
 let &t_EI.="\e[1 q"
 let &t_te.="\e[0 q"
 
-"Python stuff switch for mac and unix
-if has("unix")
-    let s:uname = system("uname")
-    let g:python_host_prog='python'
-    if s:uname == "Darwin\n"
-        let g:python_host_prog='python'
-    endif
-endif
-
 if has("gui_running")
    let s:uname = system("uname")
    if s:uname == "Darwin\n"
