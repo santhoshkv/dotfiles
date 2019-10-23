@@ -61,6 +61,10 @@ Plug 'joshdick/onedark.vim'
 
 Plug 'sheerun/vim-polyglot'
 
+Plug 'deoplete-plugins/deoplete-jedi'
+
+Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
