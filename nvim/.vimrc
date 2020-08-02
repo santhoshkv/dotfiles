@@ -396,6 +396,7 @@ let g:pymode_folding = 0
 " Remap 'insert ped breakpoint' from <leader>b to <leader>pdb
 
 let g:pymode_breakpoint_bind = '<leader>pdb'
+let g:pymode_breakpoint_cmd = "import ipdb; ipdb.set_trace()  # XXX BREAKPOINT"
 
 let g:pymode_rope = 0
 let g:pymode_rope_completion = 0
