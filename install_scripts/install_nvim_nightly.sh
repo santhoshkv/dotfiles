@@ -1,4 +1,10 @@
 #!/bin/sh
+rpm -q epel-release || sudo yum -y install epel-release openssl-devel
+sudo yum makecache
+rpm -q python36 || sudo yum -y install python36 python-pip python3-devel
+pip2 install neovim
+pip2 install ipdb
+pip3 install neovim
 cd $HOME
 wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
 chmod u+x nvim.appimage

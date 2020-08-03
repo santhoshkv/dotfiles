@@ -1,5 +1,5 @@
 #!/bin/sh
-
+cp ~/dotfiles/bash/.gitconfig ~/
 cat >> $HOME/.bashrc <<EOF
 export TERM=xterm-256color
 
