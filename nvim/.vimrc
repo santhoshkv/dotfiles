@@ -65,6 +65,12 @@ Plug 'deoplete-plugins/deoplete-jedi'
 
 Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 
+Plug 'pangloss/vim-javascript'
+
+Plug 'leafgarland/typescript-vim'
+
+Plug 'maxmellon/vim-jsx-pretty'
+
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -427,3 +433,13 @@ let g:pymode_python = 'python'
 " FOLD settings
 "
 set foldlevelstart=20
+
+"nnoremap <C-J> <C-W><C-J>
+"nnoremap <C-K> <C-W><C-K>
+"nnoremap <C-L> <C-W><C-L>
+"nnoremap <C-H> <C-W><C-H>
+"
+nmap <silent> <C-Up> :wincmd k<CR>
+nmap <silent> <C-Down> :wincmd j<CR>
+nmap <silent> <C-Left> :wincmd h<CR>
+nmap <silent> <C-Right> :wincmd l<CR>
