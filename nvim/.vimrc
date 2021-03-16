@@ -316,9 +316,19 @@ let g:python_highlight_all = 1
 au BufNewFile,BufRead *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=99 expandtab autoindent fileformat=unix
 
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#disable_auto_complete = 1
-inoremap <expr> <C-Space>  deoplete#manual_complete()
+let g:deoplete#auto_complete = 0
+call deoplete#custom#option('max_list', 30)
+"inoremap <expr> <C-Space>  deoplete#manual_complete()
 
+
+inoremap <silent><expr> <C-Space>
+\ pumvisible() ? "\<C-n>" :
+\ <SID>check_back_space() ? "\<TAB>" :
+\ deoplete#manual_complete()
+function! s:check_back_space() abort "{{{
+let col = col('.') - 1
+return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
 
 "##################  YCM settings ###################
 "let g:ycm_auto_trigger = 0
