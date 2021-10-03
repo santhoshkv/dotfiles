@@ -17,8 +17,4 @@ source /venv/bin/activate
 pip install --upgrade pynvim
 mkdir -p $HOME/.config/nvim/
 touch $HOME/.config/nvim/init.vim
-cat > $HOME/.config/nvim/init.vim <<EOF
-set runtimepath^=~/.vim runtimepath+=~/.vim/after
-let &packpath = &runtimepath
-source ~/dotfiles/nvim/.vimrc
-EOF
+ln -s $HOME/dotfiles/nvim/.config .

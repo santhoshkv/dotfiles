@@ -47,29 +47,15 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-Plug 'w0rp/ale'
-
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
 
 Plug 'majutsushi/tagbar'
-
-Plug 'tmhedberg/SimpylFold'
-
-Plug 'Konfekt/FastFold'
 
 Plug 'joshdick/onedark.vim'
 
 Plug 'sheerun/vim-polyglot'
 
-Plug 'deoplete-plugins/deoplete-jedi'
-
-Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
-
-Plug 'pangloss/vim-javascript'
-
-Plug 'leafgarland/typescript-vim'
-
-Plug 'maxmellon/vim-jsx-pretty'
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -87,7 +73,8 @@ call plug#end()
 "#########################################################
 "
 " vimgrep /path_to_command/gj ./**/*.rb 
-"
+
+:command -nargs=1 Greppy vimgrep /<args>/gj ./**/*.py
 "
 "#################### color settings
 "
@@ -303,8 +290,6 @@ let g:go_bin_path = $GOBIN
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_autodetect_gopath = 1
-"inoremap <C-Space> <C-x><C-o>
-"inoremap <C-@> <C-Space>
 
 
 "#########################################################
@@ -314,79 +299,8 @@ let g:go_autodetect_gopath = 1
 let g:python_highlight_all = 1
 
 au BufNewFile,BufRead *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=99 expandtab autoindent fileformat=unix
+inoremap <silent><expr> <c-space> coc#refresh()
 
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_complete = 0
-call deoplete#custom#option('max_list', 30)
-"inoremap <expr> <C-Space>  deoplete#manual_complete()
-
-
-inoremap <silent><expr> <C-Space>
-\ pumvisible() ? "\<C-n>" :
-\ <SID>check_back_space() ? "\<TAB>" :
-\ deoplete#manual_complete()
-function! s:check_back_space() abort "{{{
-let col = col('.') - 1
-return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"}}}
-
-"##################  YCM settings ###################
-"let g:ycm_auto_trigger = 0
-"
-"let g:ycm_semantic_triggers =  {
-"            \   'c' : ['->', '.'],
-"            \   'objc' : ['->', '.'],
-"            \   'ocaml' : ['.', '#'],
-"            \   'cpp,objcpp' : ['->', '.', '::'],
-"            \   'perl' : ['->'],
-"            \   'php' : ['->', '::', '"', "'", 'use ', 'namespace ', '\'],
-"            \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
-"            \   'html': ['<', '"', '</', ' '],
-"            \   'vim' : ['re![_a-za-z]+[_\w]*\.'],
-"            \   'ruby' : ['.', '::'],
-"            \   'lua' : ['.', ':'],
-"            \   'erlang' : [':'],
-"            \   'haskell' : ['.', 're!.']
-"            \ }
-"
-"let g:ycm_python_interpreter_path = '/venv/bin/python'
-"let g:ycm_python_sys_path = []
-"let g:ycm_extra_conf_vim_data = [
-"  \  'g:ycm_python_interpreter_path',
-"  \  'g:ycm_python_sys_path'
-"  \]
-"let g:ycm_global_ycm_extra_conf = '~/dotfiles/global_extra_conf.py'
-"
-"let g:ycm_key_list_select_completion = ['<TAB>']
-"let g:ycm_key_list_previous_completion = ['<S-TAB>']
-"let g:ycm_key_list_stop_completion = ['<C-y>', '<CR>']
-"
-"let g:ycm_seed_identifiers_with_syntax = 1
-"let g:ycm_filetype_specific_completion_to_disable = {
-"      \ 'gitcommit': 1,
-"      \ 'python': 1
-"      \}
-"
-"
-"""""""""""""" Python Mode
-
-
-" Python-mode
-"  \ 'dir': '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|installer\|node_modules\|/home/epsilon/calm\|/home/epsilon/lambda\|/home/epsilon/cloud\|build\|tmp$',
-" Activate rope
-" Keys:
-" K             Show python docs
-" <Ctrl-Space>  Rope autocomplete
-" <Ctrl-c>g     Rope goto definition
-" <Ctrl-c>d     Rope show documentation
-" <Ctrl-c>f     Rope find occurrences
-" <Leader>b     Set, unset breakpoint (g:pymode_breakpoint enabled)
-" [[            Jump on previous class or function (normal, visual, operator modes)
-" ]]            Jump on next class or function (normal, visual, operator modes)
-" [M            Jump on previous class or method (normal, visual, operator modes)
-" ]M            Jump on next class or method (normal, visual, operator modes)
-
-" Documentation
 let g:pymode_doc = 1
 let g:pymode_doc_key = 'K'
 
@@ -419,26 +333,10 @@ let g:pymode_rope_completion = 0
 let g:pymode_rope_complete_on_dot = 0
 let g:pymode_rope_lookup_project = 0
 
-
-
 let g:pymode_options_max_line_length = 999
 
 
 let g:pymode_python = 'python'
-
-"autocmd FileType python setlocal completeopt-=preview
-"
-"let g:jedi#popup_on_dot = 0
-"let g:jedi#goto_command = "gd"
-"let g:jedi#goto_assignments_command = "<leader>g"
-"let g:jedi#goto_definitions_command = "gd"
-"let g:jedi#documentation_command = "K"
-"let g:jedi#usages_command = "<leader>n"
-"let g:jedi#completions_command = "<C-Space>"
-"let g:jedi#rename_command = "<leader>r"
-"let g:jedi#popup_select_first = 0
-"let g:jedi#show_call_signatures = "0"
-"
 
 " FOLD settings
 "
@@ -453,3 +351,34 @@ nmap <silent> <C-Up> :wincmd k<CR>
 nmap <silent> <C-Down> :wincmd j<CR>
 nmap <silent> <C-Left> :wincmd h<CR>
 nmap <silent> <C-Right> :wincmd l<CR>
+
+
+" COC settings
+
+inoremap <silent><expr> <c-space> coc#refresh()
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gtd <Plug>(coc-type-definition)
+
+" gi - go to implementation
+nmap <silent> gi <Plug>(coc-implementation)
+
+" gr - goto references
+nmap <silent> gr <Plug>(coc-references)
+
+" List errors
+nnoremap <silent> <leader>cl  :<C-u>CocList locationlist<cr>
+
+" list commands available in tsserver (and others)
+nnoremap <silent> <leader>cc  :<C-u>CocList commands<cr>
+
+" restart when tsserver gets wonky
+nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
+
+" view all errors
+nnoremap <silent> <leader>cl  :<C-u>CocList locationlist<CR>
+
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-html', 'coc-css', 'coc-prettier', 'coc-tsserver', 'coc-eslint', 'coc-go', 'coc-highlight', 'coc-jedi', 'coc-swagger', 'coc-tsserver', 'coc-yaml']
+
+set signcolumn=yes
