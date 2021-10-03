@@ -45,10 +45,6 @@ Plug 'airblade/vim-gitgutter'
 
 Plug 'ctrlpvim/ctrlp.vim'
 
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
-Plug 'python-mode/python-mode', { 'branch': 'develop' }
-
 Plug 'majutsushi/tagbar'
 
 Plug 'joshdick/onedark.vim'
@@ -57,13 +53,7 @@ Plug 'sheerun/vim-polyglot'
 
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 
 call plug#end()
 
@@ -72,7 +62,7 @@ call plug#end()
 "##################  Personal settings ###################
 "#########################################################
 "
-" vimgrep /path_to_command/gj ./**/*.rb 
+" vimgrep /path_to_command/gj ./**/*.rb
 
 :command -nargs=1 Greppy vimgrep /<args>/gj ./**/*.py
 "
@@ -287,9 +277,12 @@ let g:go_highlight_variable_declarations = 1
 
 let g:go_bin_path = $GOBIN
 
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
-let g:go_autodetect_gopath = 1
+"let g:go_def_mode='gopls'
+"let g:go_info_mode='gopls'
+"let g:go_autodetect_gopath = 1
+"
+let g:go_diagnostics_enabled = 0
+let g:go_metalinter_enabled = []
 
 
 "#########################################################

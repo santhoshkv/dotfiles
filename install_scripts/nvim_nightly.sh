@@ -14,7 +14,7 @@ cp squashfs-root/usr/bin/nvim /usr/bin/
 rm -rf squashfs
 rm nvim.appimage*
 source /venv/bin/activate
-pip install --upgrade pynvim
+pip3 install --upgrade pynvim
 mkdir -p $HOME/.config/nvim/
 touch $HOME/.config/nvim/init.vim
 ln -s $HOME/dotfiles/nvim/.config .
