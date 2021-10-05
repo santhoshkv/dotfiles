@@ -53,8 +53,6 @@ Plug 'sheerun/vim-polyglot'
 
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
-
 call plug#end()
 
 
