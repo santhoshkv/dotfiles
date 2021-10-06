@@ -6,7 +6,7 @@ pip2 install neovim
 pip2 install ipdb
 pip3 install neovim
 cd $HOME
-wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
+wget https://github.com/neovim/neovim/releases/download/v0.5.1/nvim.appimage
 chmod u+x nvim.appimage
 ./nvim.appimage --appimage-extract
 cp -r squashfs-root/usr/share/nvim/ /usr/share/
