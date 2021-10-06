@@ -15,5 +15,4 @@ rm -rf squashfs
 rm nvim.appimage*
 source /venv/bin/activate
 pip3 install --upgrade pynvim
-touch $HOME/.config/nvim/init.vim
 ln -s $HOME/dotfiles/nvim/.config .
