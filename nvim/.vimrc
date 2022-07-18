@@ -51,7 +51,9 @@ Plug 'joshdick/onedark.vim'
 
 Plug 'sheerun/vim-polyglot'
 
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+"Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 
 call plug#end()
 
@@ -370,6 +372,6 @@ nnoremap <silent> <leader>cl  :<C-u>CocList locationlist<CR>
 
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-html', 'coc-css', 'coc-prettier', 'coc-tsserver', 'coc-eslint', 'coc-go', 'coc-highlight', 'coc-jedi', 'coc-swagger', 'coc-tsserver', 'coc-yaml']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-eslint', 'coc-go', 'coc-highlight', 'coc-jedi']
 
 set signcolumn=yes
