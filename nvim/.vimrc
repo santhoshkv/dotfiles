@@ -51,9 +51,7 @@ Plug 'joshdick/onedark.vim'
 
 Plug 'sheerun/vim-polyglot'
 
-"Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 
 call plug#end()
 
@@ -107,23 +105,16 @@ set hidden                  " can put buffer to the background without writing
 set lazyredraw              " don't update the display while executing macros
 set ttyfast                 " Send more characters at a given time.
 " --- history / file handling ---
-set history=999             " Increase history (default = 20)
-set undolevels=999          " Moar undo (default=100)
+set history=100             " Increase history (default = 20)
+set undolevels=100          " Moar undo (default=100)
 " --- backup and swap files ---
 " annoying and unnecessary...
 set nobackup
 set nowritebackup
 set noswapfile
 set completeopt=longest,menuone
-"let g:airline_solarized_bg='dark'
-"let g:airline_theme='base16'
 let g:airline_theme='onedark'
 
-
-
-cabbr <expr> ,l expand("/Volumes/epsilon_share/lambda")
-cabbr <expr> ,c expand("/Volumes/epsilon_share/calm")
-cabbr <expr> ,o expand("/Volumes/epsilon_share/cloud")
 cabbr <expr> zz expand(":GundoToggle<CR>")
 cabbr <expr> xx expand(":NERDTreeToggle<CR>")
 cabbr <expr> bb expand(":CtrlPBuffer<CR>")
@@ -150,7 +141,6 @@ set wildmenu
 if maparg('<C-L>', 'n') ==# ''
   nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
 endif
-
 
 set nocompatible
 set laststatus=2
@@ -372,6 +362,6 @@ nnoremap <silent> <leader>cl  :<C-u>CocList locationlist<CR>
 
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-eslint', 'coc-go', 'coc-highlight', 'coc-jedi']
+let g:coc_global_extensions = ['coc-prettier', 'coc-pyright', 'coc-json', 'coc-git', 'coc-eslint', 'coc-go', 'coc-highlight']
 
 set signcolumn=yes
